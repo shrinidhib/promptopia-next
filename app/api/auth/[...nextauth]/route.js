@@ -12,7 +12,8 @@ const handler=NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         })
     ],
-    async session({session}){
+    callback:{
+        async session({session}){
             const sessionUser=await User_promptopia.findOne({
                 email: session.user.email
             })
@@ -20,29 +21,32 @@ const handler=NextAuth({
             session.user.id=sessionUser._id.toString();
 
             return session;
-    },
+        },
 
-    async signIn({profile}){
-        try{
-            await connectToDB();
+        async signIn({profile}){
+            try{
+                await connectToDB();
 
-            const userExists=await User_promptopia.findOne({
-                email: profile.email
-            })
-
-            if (!userExists){
-                await User_promptopia.create({
-                    email: profile.email,
-                    username: profile.name.replace(" ",'').toLowerCase(),
-                    image: profile.picture,
+                const userExists=await User_promptopia.findOne({
+                    email: profile.email
                 })
+
+                if (!userExists){
+                    await User_promptopia.create({
+                        email: profile.email,
+                        username: profile.name.replace(" ",'').toLowerCase(),
+                        image: profile.picture,
+                    })
+                }
+
+
+            }catch(error){
+                console.log(error)
             }
-
-
-        }catch(error){
+        }
 
         }
-    }
+    
 })
 
 export {handler as GET, handler as POST}
