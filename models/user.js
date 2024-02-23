@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const UserSchema=newSchema({
+const UserSchema=new Schema({
     email:{
         type: String,
         unique: [true, 'Email already exists'],
@@ -16,6 +16,6 @@ const UserSchema=newSchema({
     }
 })
 
-const User_promptopia=models.User_promptopia || model("User_promptomia",UserSchema)
+const User_promptopia=models.User_promptopia || model("User_promptopia",UserSchema)
 
 export default User_promptopia
