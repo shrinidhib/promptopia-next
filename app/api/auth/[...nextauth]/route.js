@@ -2,7 +2,7 @@ import nextAuth from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google'
 
-import User_promptopia from "@models/user";
+import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
 const handler=NextAuth({
@@ -14,7 +14,7 @@ const handler=NextAuth({
     ],
     callback:{
         async session({session}){
-            const sessionUser=await User_promptopia.findOne({
+            const sessionUser=await User.findOne({
                 email: session.user.email
             })
 
@@ -27,12 +27,12 @@ const handler=NextAuth({
             try{
                 await connectToDB();
 
-                const userExists=await User_promptopia.findOne({
+                const userExists=await User.findOne({
                     email: profile.email
                 })
 
                 if (!userExists){
-                    await User_promptopia.create({
+                    await User.create({
                         email: profile.email,
                         username: profile.name.replace(" ",'').toLowerCase(),
                         image: profile.picture,
