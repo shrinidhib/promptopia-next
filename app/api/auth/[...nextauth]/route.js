@@ -1,4 +1,4 @@
-import nextAuth from "next-auth";
+
 import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google'
 
@@ -37,14 +37,15 @@ const handler=NextAuth({
                         image: profile.picture,
                     })
                 }
+                return true
 
 
             }catch(error){
                 console.log(error)
+                return false
             }
-        }
-
-        }
+        },
+        },
     
 })
 
