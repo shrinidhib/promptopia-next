@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
@@ -24,12 +24,13 @@ const MyProfile = () => {
     
           setPosts(data)
         }
-        if (session?.user.id) fetchPosts()
+        if (session?.user.id) {
+            fetchPosts()}
       },[])
   return (
     <Profile name="My"
     desc="Welcome to your profle page"
-    data={[]}
+    data={posts}
     handleEdit={handleEdit}
     handleDelete={handleDelete}/>
   )
