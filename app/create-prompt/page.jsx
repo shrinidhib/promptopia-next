@@ -18,6 +18,7 @@ const CreatePrompt = () => {
         e.preventDefault()
 
         setSubmitting(true)
+        try{
             const response=await fetch('/api/prompt/new',{
                 method:'POST',
                 body: JSON.stringify({
@@ -29,7 +30,7 @@ const CreatePrompt = () => {
             if (response.ok){
                 router.push('/')
             }
-        try{
+        
 
         }catch(error){
             console.log(error)

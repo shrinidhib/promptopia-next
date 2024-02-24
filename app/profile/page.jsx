@@ -10,10 +10,11 @@ import Profile from '@components/Profile'
 const MyProfile = () => {
     const {data:session}=useSession()
     const [posts,setPosts]=useState([])
-    const handleEdit=()=>{
-
+    const router=useRouter()
+    const handleEdit=(post)=>{
+        router.push(`update-prompt?id=${post._id}`)
     }
-    const handleDelete=async()=>{
+    const handleDelete=async(post)=>{
 
     }
     useEffect(()=>{
