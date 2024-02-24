@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Form from '@components/Form'
@@ -30,9 +30,6 @@ const EditPrompt = () => {
 
     const updatePrompt=async(e)=>{
         e.preventDefault()
-
-       
-
         setSubmitting(true)
         if (!promptId) return alert('PromptId not found')
         try{
@@ -54,9 +51,6 @@ const EditPrompt = () => {
             setSubmitting(false)
         }
 
-    }
-    if (!promptId){
-        return null
     }
   return (
     <Form
